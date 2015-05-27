@@ -1,0 +1,32 @@
+{
+	"name": "lionar/events",
+	"version": "0.0.1",
+	"description": "Lionar's simple event dispatcher component",
+	"keywords": ["lew", "component"],
+	"license": "MIT",
+	"require" : {
+		"php": ">=5.5.9"
+  	},
+	"require-dev": {
+		"league/container": "2.0.*@dev",
+		"mockery/mockery": "1.0.*@dev",
+		"phpunit/phpunit": "4.8.*@dev"
+	},
+	"autoload": {
+	    "psr-4": {
+			"Lionar\\Events\\": "source"
+	    }
+  	},
+	"autoload-dev": {
+    	"psr-4": {
+			"Lionar\\Events\\Tests\\": "tests"
+		},
+		"files": [
+
+		]
+    },
+	"config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "stable"
+}
