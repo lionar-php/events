@@ -30,7 +30,7 @@ $dispatcher->fire( 'my eventname' );
 
 ###### result
 ```php
-hello
+'hello'
 ```
 ##### return values
 
