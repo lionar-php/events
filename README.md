@@ -20,7 +20,7 @@ use Lionar\Events\Dispatcher;
 
 $dispatcher = new Dispatcher;
 
-$dispatcher->add( 'my eventname' function( )
+$dispatcher->add( 'my eventname', function( )
 {
     echo 'hello';
 });
@@ -36,7 +36,7 @@ hello
 ```php
 use Lionar\Events\Dispatcher;
 
-$dispatcher->add( 'i created a post' function( )
+$dispatcher->add( 'i created a post', function( )
 {
     return 'this is my post';
 });
