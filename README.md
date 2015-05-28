@@ -29,8 +29,9 @@ $dispatcher->fire( 'my eventname' );
 ```
 
 ###### result
+```php
 hello
-
+```
 ##### return values
 
 ```php
@@ -45,7 +46,7 @@ var_dump( $dispatcher->fire( 'i created a post' ) );
 ```
 
 ###### result
+```php
 array( 'this is my post' );
-
-
+```
 
