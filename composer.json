@@ -4,6 +4,14 @@
 	"description": "Lionar's simple event dispatcher component",
 	"keywords": ["lew", "component"],
 	"license": "MIT",
+	"authors": [
+	        {
+	            "name": "Aron Wouters",
+	            "email": "lionar@mail.com",
+	            "homepage": "",
+	            "role": "Developer"
+        	}
+    	],
 	"require" : {
 		"php": ">=5.5.9"
   	},
