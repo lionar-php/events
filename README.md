@@ -11,7 +11,8 @@ more documentation tomorrow**
 
 the examples below must all be seen as *separate* scenarios.
 
-#### without container
+#### without supplied listener resolver
+when no listener resolver was supplied the dispatcher will use call_user_func_array to resolve and call closures.
 
 ##### basic usage
 
