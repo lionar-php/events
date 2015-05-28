@@ -1,7 +1,51 @@
 # events
-simple php event dispatcher component
+simple php event dispatcher component. This dispatcher uses closures to register event callback functions.
+Optionally you can supply a class that implements the ListenerResolver interface to resolve closures.
+Examples will be shown below in usage. 
 
-## TODO
+## usage
+**NOTE: this documentation is still a work in progress. Not everything is documented as of yet. I will add
+more documentation tomorrow**
 
-- fix parameters default value skip; when a default value was added to a function argument it should 
-  use that value when no other value could be resolved or provided. 
+### examples
+
+the examples below must all be seen as *separate* scenarios.
+
+#### without container
+
+##### basic usage
+
+```php
+use Lionar\Events\Dispatcher;
+
+$dispatcher = new Dispatcher;
+
+$dispatcher->add( 'my eventname' function( )
+{
+    echo 'hello';
+});
+
+$dispatcher->fire( 'my eventname' );
+```
+
+###### result
+hello
+
+##### return values
+
+```php
+use Lionar\Events\Dispatcher;
+
+$dispatcher->add( 'i created a post' function( )
+{
+    return 'this is my post';
+});
+
+var_dump( $dispatcher->fire( 'i created a post' ) );
+```
+
+###### result
+array( 'this is my post' );
+
+
+
