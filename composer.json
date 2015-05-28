@@ -1,21 +1,20 @@
 {
 	"name": "lionar/events",
 	"description": "Lionar's simple event dispatcher component",
-	"keywords": ["lew", "component"],
+	"keywords": ["lionar", "component"],
 	"license": "MIT",
 	"authors": [
-	        {
-	            "name": "Aron Wouters",
-	            "email": "lionar@mail.com",
-	            "homepage": "",
-	            "role": "Developer"
-        	}
-    	],
+        {
+            "name": "Aron Wouters",
+            "email": "lionar@mail.com",
+            "homepage": "",
+            "role": "Developer"
+    	}
+	],
 	"require" : {
 		"php": ">=5.5.9"
   	},
 	"require-dev": {
-		"league/container": "2.0.*@dev",
 		"mockery/mockery": "1.0.*@dev",
 		"phpunit/phpunit": "4.8.*@dev"
 	},
