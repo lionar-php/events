@@ -1,6 +1,5 @@
 {
 	"name": "lionar/events",
-	"version": "0.0.1",
 	"description": "Lionar's simple event dispatcher component",
 	"keywords": ["lew", "component"],
 	"license": "MIT",
