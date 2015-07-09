@@ -6,7 +6,7 @@ Examples will be shown below in usage.
 
 ## usage
 **NOTE: this documentation is still a work in progress. Not everything is documented as of yet. I will add
-more documentation tomorrow**
+more documentation soon**
 
 ### examples
 
