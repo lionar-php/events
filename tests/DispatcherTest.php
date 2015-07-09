@@ -2,24 +2,22 @@
 
 namespace Lionar\Events\Tests;
 
-use Lionar\Events\Dispatcher,
+use InvalidArgumentException,
+    Lionar\Events\Dispatcher,
     Mockery;
 
-class UsedToCallTheResolver
-{
-
-}
+class Dependency { }
 
 class DispatcherTest extends TestCase
 {
-    private $dispatcher, $resolver = null;
-    private $event = 'i created a post';
-    private $inexistentEvent = 'inexistent event';
+    private $dispatcher, $resolver  = null;
+    private $event                  = 'i created a post';
+    private $inexistentEvent        = 'in-existent event';
 
     public function setUp( )
     {
-        $this->dispatcher = new Dispatcher( );
         $this->resolver = Mockery::mock( 'Lionar\\Events\\ListenerResolver' );
+        $this->dispatcher = new Dispatcher( $this->resolver );
     }
 
     /**
@@ -41,43 +39,43 @@ class DispatcherTest extends TestCase
 
     /**
      * @test
-     * @dataProvider eventReturnValues
      */
-    public function fire_withExsistentEventAndRegisteredListenerWithParameters_firesTheListenerAndReturnsItsResultsIfNotNullWasReturned( $value )
+    public function fire_withExistentEventAndRegisteredListenerThatReturnsNothing_firesTheListenerAndReturnsAnEmptyArray( )
     {
+        $this->resolver->shouldReceive( 'call' );
         $this->dispatcher->add( $this->event, function( ) { } );
-        for ( $times = 2; $times > 0; $times -= 1 )
-            $this->dispatcher->add( $this->event, function( ) use( $value ) { return $value; });
-
-        $this->assertEquals( array( $value, $value ), $this->dispatcher->fire( $this->event, array( 'value' => $value ) ) );
+        $this->assertEmpty( $this->dispatcher->fire( $this->event ) );
     }
 
     /**
      * @test
      */
-    public function fire_withExsistentEventAndRegisteredListenerWithResolverResolvableParameters_firesTheListenerInjectsTheDependencieAndReturnsListenerResultsIfNotNullWasReturned( )
+    public function fire_withExistentEventRegisteredListenerAndProvidedPayload_callsListenerResolverWithProvidedPayloadAndReturnsItsResultsAsAnArray( )
     {
-        $dependency = Mockery::mock( 'Dependency' );
-        $this->resolver->shouldReceive( 'call' )->once( )->andReturn( null );
-        $this->resolver->shouldReceive( 'call' )->once( )->andReturn( $dependency );
+        $value = 'hello world';
+        $payload = array( 'value' => $value );
 
-        $dispatcher = new Dispatcher( $this->resolver );
-        $dispatcher->add( $this->event, function( ) { } );
-        
-        $dispatcher->add( $this->event, function( UsedToCallTheResolver $dependency )
+        $listener = function( $value )
         {
-            return $dependency;
-        });
+            return $value;
+        };
 
-        $this->assertEquals( array( $dependency ),  $dispatcher->fire( $this->event ) );
+        $this->resolver->shouldReceive( 'call' )->with( $listener, $payload )->twice( )->andReturn( $value );
+
+        for ( $times = 2; $times > 0; $times -= 1 )
+            $this->dispatcher->add( $this->event, $listener );
+
+        $this->assertEquals( array( $value, $value ), $this->dispatcher->fire( $this->event, $payload ) );
     }
 
 	/**
      * @test
      */
-    public function fire_withExsistentEventAndRegisteredListenerWithNonResolverResolvableParameterNoProvidedCorrespondingPayloadAndNoDefaultValueForParameter_skipsThatListener( )
+    public function fire_withExistentEventAndRegisteredListenerWithNonResolverResolvableParameterNoProvidedCorrespondingPayloadAndNoDefaultValueForParameter_skipsThatListener( )
     {
-       	$this->dispatcher->add( $this->event, function( $someNotProvidedParameter )
+        $this->resolver->shouldReceive( 'call' )->once( )->andThrow( new InvalidArgumentException );
+
+        $this->dispatcher->add( $this->event, function( $someNotProvidedParameter )
 		{
 			return $someNotProvidedParameter;
 		});
@@ -85,39 +83,11 @@ class DispatcherTest extends TestCase
 		$this->assertEmpty( $this->dispatcher->fire( $this->event ) );
     }
 
-	/**
-     * @test
-     */
-    public function fire_withExsistentEventAndRegisteredListenerWithProvidedPayload_injectsProvidedPayloadByKeyInListener( )
-    {
-		$greeting = 'hello world';
-		$payload = array( 'greeting' => $greeting );
-
-       	$this->dispatcher->add( $this->event, function( $greeting )
-		{
-			return $greeting;
-		});
-
-		$this->assertEquals( array( $greeting ), $this->dispatcher->fire( $this->event, $payload ) );   
-    }
 
     /**
      * @test
      */
-    public function fire_withExsistentEventAndRegisteredListenerWithNonResolverResolvableParameterNoProvidedCorrespondingPayloadButProvidedDefaultValueForParameter_usesDefaultParameter( )
-    {
-        $this->dispatcher->add( $this->event, function( $greeting = 'hello world' )
-        {
-            return $greeting;
-        });
-
-        $this->assertEquals( array( 'hello world' ), $this->dispatcher->fire( $this->event ) );   
-    }
-
-    /**
-     * @test
-     */
-    public function fire_withExsistentEventAndRegisteredListenerWithNonResolverResolvableParametersNoDefaultValueAndNoProvidedCorrespondingPayload_LogsItsMistakes( )
+    public function fire_withExistentEventAndRegisteredListenerWithNonResolverResolvableParametersNoDefaultValueAndNoProvidedCorrespondingPayload_LogsItsMistakes( )
     {
         $this->dispatcher->add( $this->event, function( $someNotProvidedParameter )
         {

@@ -10,7 +10,7 @@ class Dispatcher
     protected $resolver = null;
     protected $events = array( );
 
-    public function __construct( ListenerResolver $resolver = null )
+    public function __construct( ListenerResolver $resolver )
     {
         $this->resolver = $resolver;
     }
@@ -30,41 +30,26 @@ class Dispatcher
     public function fire( $event, $payload = array( ) )
     {
         if( ! $this->hasRegistered( $event ) )
-            return;
+            return false;
 
-        $results = array( );
+        $results = $this->gatherResultsFrom( $event, $payload );
 
-        foreach( $this->events[ $event ] as $listener )
-            if( $this->hasCorrectParametersFor( $listener, $payload ) )
-                $results[ ] = $this->call( $listener, $payload );
-
-        return array_values( array_filter($results, function( $value ) { return ! is_null( $value ); }) );
+        return array_values( array_filter( $results, function( $value ) { return ! is_null( $value ); } ) );
     }
 
-	private function hasCorrectParametersFor( Callable $listener, $payload )
-	{
-		$reflection = new ReflectionFunction( $listener );
-		$parameters = $reflection->getParameters( );
-		
-		foreach( $parameters as $parameter )
-			if( ! $parameter->getClass( ) and ! array_key_exists( $parameter->getName( ), $payload ) and ! $parameter->isDefaultValueAvailable( ) )
-				return false;
-		return true;
-	}
-
-    private function call( Callable $listener, $payload )
+    private function gatherResultsFrom( $event, array $payload, array $results = array( ) )
     {
-        if( isset( $this->resolver ) )
+        foreach( $this->events[ $event ] as $listener )
+            $results[ ] = $this->call( $listener, $payload );
+        return $results;
+    }
+
+    private function call( Callable $listener, array $payload = array( ) )
+    {
+        try
+        {
             return $this->resolver->call( $listener, $payload );
-        return call_user_func_array( $listener, $payload );
+        }
+        catch( InvalidArgumentException $exception ) { return null; }
     }
 }
-
-// implement default parameter now
-
-// 1. if a $payload parameter has been provided with same name as $parameters->getName( )
-//      use that provided value
-//      
-// 2. if the parameter is a class, then let the resolver resolve that class
-// 3. if a default value is provided, and no provided value or resolvable class was given then use that default value
-// 4. if none of the above applies, skip the listener altogether and log this skip

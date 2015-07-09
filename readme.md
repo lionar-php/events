@@ -3,6 +3,7 @@ simple php event dispatcher component. This dispatcher uses closures to register
 Optionally you can supply a class that implements the ListenerResolver interface to resolve closures.
 Examples will be shown below in usage. 
 
+
 ## usage
 **NOTE: this documentation is still a work in progress. Not everything is documented as of yet. I will add
 more documentation tomorrow**
