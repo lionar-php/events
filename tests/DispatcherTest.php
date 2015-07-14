@@ -83,22 +83,6 @@ class DispatcherTest extends TestCase
 		$this->assertEmpty( $this->dispatcher->fire( $this->event ) );
     }
 
-
-    /**
-     * @test
-     */
-    public function fire_withExistentEventAndRegisteredListenerWithNonResolverResolvableParametersNoDefaultValueAndNoProvidedCorrespondingPayload_LogsItsMistakes( )
-    {
-        $this->dispatcher->add( $this->event, function( $someNotProvidedParameter )
-        {
-            return $someNotProvidedParameter;
-        });
-
-        $this->markTestIncomplete(
-            'Still need to mock a logger and test if the dispatcher logs the mistake of insufficient listener parameters'
-        );
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Data providers

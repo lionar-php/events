@@ -50,6 +50,9 @@ class Dispatcher
         {
             return $this->resolver->call( $listener, $payload );
         }
-        catch( InvalidArgumentException $exception ) { return null; }
+        catch( InvalidArgumentException $exception )
+        {
+            return null;
+        }
     }
 }
