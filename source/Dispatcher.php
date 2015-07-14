@@ -2,7 +2,7 @@
 
 namespace Lionar\Events;
 
-use InvalidArgumentException,
+use Exception,
     ReflectionFunction;
 
 class Dispatcher
@@ -50,7 +50,7 @@ class Dispatcher
         {
             return $this->resolver->call( $listener, $payload );
         }
-        catch( InvalidArgumentException $exception )
+        catch( Exception $exception )
         {
             return null;
         }
