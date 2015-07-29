@@ -49,10 +49,10 @@ class DispatcherTest extends TestCase
 
     /**
      * @test
+     * @dataProvider eventReturnValues
      */
-    public function fire_withExistentEventRegisteredListenerAndProvidedPayload_callsListenerResolverWithProvidedPayloadAndReturnsItsResultsAsAnArray( )
+    public function fire_withExistentEventRegisteredListenerAndProvidedPayload_callsListenerResolverWithProvidedPayloadAndReturnsItsResultsAsAnArray( $value )
     {
-        $value = 'hello world';
         $payload = array( 'value' => $value );
 
         $listener = function( $value )
