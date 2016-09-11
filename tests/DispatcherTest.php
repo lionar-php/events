@@ -15,73 +15,94 @@ class DispatcherTest extends TestCase
     private $event                  = 'i created a post';
     private $inexistentEvent        = 'in-existent event';
 
-    public function setUp( )
+    public function setUp ( )
     {
-        $this->resolver = Mockery::mock( 'Agreed\\Application' );
-        $this->dispatcher = new Dispatcher( $this->resolver );
+        $this->resolver = Mockery::mock ( 'Agreed\\Application' );
+        $this->dispatcher = new Dispatcher ( $this->resolver );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Has method testing
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @test
+     */
+    public function has_withInexistentEvent_returnsFalse ( )
+    {
+        $this->assertFalse ( $this->dispatcher->has ( $this->inexistentEvent ) );
     }
 
     /**
      * @test
      */
-    public function hasRegistered_withInexistentEvent_returnsFalse( )
+    public function has_withExistentEvent_returnsTrue ( )
     {
-        $this->assertFalse( $this->dispatcher->hasRegistered( $this->inexistentEvent ) );
+        $this->dispatcher->listen ( $this->event, function ( ) { } );
+        $this->assertTrue ( $this->dispatcher->has( $this->event ) );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fire method testing
+    |--------------------------------------------------------------------------
+    */
+
+   /**
+     * @test
+     */
+    public function fire_withInexistentEvent_returnsAnEmptyArray ( )
+    {
+        $results = $this->dispatcher->fire ( 'in existent event' );
+        $this->assertEquals ( array ( ), $results );
     }
 
     /**
      * @test
      */
-    public function hasRegistered_withExistentEvent_returnsTrue( )
+    public function fire_withExistentEventAndRegisteredListenerThatReturnsNothing_firesTheListenerAndReturnsAnEmptyArray ( )
     {
-        $this->dispatcher->add( $this->event, function( ) { } );
-        $this->assertTrue( $this->dispatcher->hasRegistered( $this->event ) );
-    }
-
-    /**
-     * @test
-     */
-    public function fire_withExistentEventAndRegisteredListenerThatReturnsNothing_firesTheListenerAndReturnsAnEmptyArray( )
-    {
-        $this->resolver->shouldReceive( 'call' );
-        $this->dispatcher->add( $this->event, function( ) { } );
-        $this->assertEmpty( $this->dispatcher->fire( $this->event ) );
+        $this->resolver->shouldReceive ( 'call' );
+        $this->dispatcher->listen ( $this->event, function( ) { } );
+        $this->assertEmpty ( $this->dispatcher->fire( $this->event ) );
     }
 
     /**
      * @test
      * @dataProvider eventReturnValues
      */
-    public function fire_withExistentEventRegisteredListenerAndProvidedPayload_callsListenerResolverWithProvidedPayloadAndReturnsItsResultsAsAnArray( $value )
+    public function fire_withExistentEventRegisteredListenerAndProvidedPayload_callsListenerResolverWithProvidedPayloadAndReturnsItsResultsAsAnArray ( $value )
     {
-        $payload = array( 'value' => $value );
+        $payload = array ( 'value' => $value );
 
-        $listener = function( $value )
+        $listener = function ( $value )
         {
             return $value;
         };
 
-        $this->resolver->shouldReceive( 'call' )->with( $listener, $payload )->twice( )->andReturn( $value );
+        $this->resolver->shouldReceive ( 'call' )->with ( $listener, $payload )->twice ( )->andReturn ( $value );
 
         for ( $times = 2; $times > 0; $times -= 1 )
-            $this->dispatcher->add( $this->event, $listener );
+            $this->dispatcher->listen ( $this->event, $listener );
 
-        $this->assertEquals( array( $value, $value ), $this->dispatcher->fire( $this->event, $payload ) );
+        $this->assertEquals ( array ( $value, $value ), $this->dispatcher->fire ( $this->event, $payload ) );
     }
 
 	/**
      * @test
      */
-    public function fire_withExistentEventAndRegisteredListenerWithNonResolverResolvableParameterNoProvidedCorrespondingPayloadAndNoDefaultValueForParameter_skipsThatListener( )
+    public function fire_withExistentEventAndRegisteredListenerWithNonResolverResolvableParameterNoProvidedCorrespondingPayloadAndNoDefaultValueForParameter_skipsThatListener ( )
     {
-        $this->resolver->shouldReceive( 'call' )->once( )->andThrow( new InvalidArgumentException );
+        $this->resolver->shouldReceive ( 'call' )->once ( )->andThrow ( new InvalidArgumentException );
 
-        $this->dispatcher->add( $this->event, function( $someNotProvidedParameter )
+        $this->dispatcher->listen ( $this->event, function ( $someNotProvidedParameter )
 		{
 			return $someNotProvidedParameter;
 		});
 
-		$this->assertEmpty( $this->dispatcher->fire( $this->event ) );
+		$this->assertEmpty ( $this->dispatcher->fire( $this->event ) );
     }
 
     /*
@@ -90,7 +111,7 @@ class DispatcherTest extends TestCase
     |--------------------------------------------------------------------------
     */
 
-    public function eventReturnValues( )
+    public function eventReturnValues ( )
     {
         return array(
 

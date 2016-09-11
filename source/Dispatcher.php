@@ -2,41 +2,41 @@
 
 namespace Events;
 
-use Exception,
-    ReflectionFunction;
-
 use Agreed\Application;
+use Exception;
+use ReflectionFunction;
 
-class Dispatcher
+
+class Dispatcher implements \Agreed\Events\Dispatcher
 {
-    protected $resolver = null;
-    protected $events = array ( );
+    private $resolver = null;
+    private $events = array ( );
 
     public function __construct ( Application $resolver )
     {
         $this->resolver = $resolver;
     }
 
-    public function add ( $event, Callable $listener )
+    public function listen ( $event, Callable $listener )
     {
         $this->events [ $event ] [ ] = $listener;
     }
 
-    public function hasRegistered ( $event )
+    public function fire ( $event, $payload = array ( ) ) : array
     {
-        if ( array_key_exists ( $event, $this->events ) )
-            return true;
-        return false;
-    }
-
-    public function fire ( $event, $payload = array ( ) )
-    {
-        if( ! $this->hasRegistered ( $event ) )
-            return false;
+        if( ! $this->has ( $event ) )
+            return array ( );
 
         $results = $this->gatherResultsFrom ( $event, $payload );
 
         return array_values ( array_filter ( $results, function ( $value ) { return ! is_null ( $value ); } ) );
+    }
+
+    public function has ( $event ) : bool
+    {
+        if ( array_key_exists ( $event, $this->events ) )
+            return true;
+        return false;
     }
 
     private function gatherResultsFrom ( $event, array $payload, array $results = array ( ) )
