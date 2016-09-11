@@ -1,10 +1,11 @@
 <?php
 
-namespace Lionar\Events\Tests;
+namespace Events\Tests;
 
-use InvalidArgumentException,
-    Lionar\Events\Dispatcher,
-    Mockery;
+use Events\Dispatcher,
+    InvalidArgumentException,
+    Mockery,
+    Testing\TestCase;
 
 class Dependency { }
 
@@ -16,7 +17,7 @@ class DispatcherTest extends TestCase
 
     public function setUp( )
     {
-        $this->resolver = Mockery::mock( 'Lionar\\Events\\ListenerResolver' );
+        $this->resolver = Mockery::mock( 'Agreed\\Application' );
         $this->dispatcher = new Dispatcher( $this->resolver );
     }
 

@@ -11,20 +11,21 @@
     	}
 	],
 	"require" : {
+		"lionar/agreements": "*",
 		"php": ">=5.5.9"
   	},
 	"require-dev": {
-		"mockery/mockery": "1.0.*@dev",
-		"phpunit/phpunit": "4.8.*@dev"
+		"lionar/foundation": "*",
+		"lionar/testing": "*"
 	},
 	"autoload": {
 	    "psr-4": {
-			"Lionar\\Events\\": "source"
+			"Events\\": "source"
 	    }
   	},
 	"autoload-dev": {
     	"psr-4": {
-			"Lionar\\Events\\Tests\\": "tests"
+			"Events\\Tests\\": "tests"
 		},
 		"files": [
 
@@ -33,5 +34,5 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "dev"
 }
