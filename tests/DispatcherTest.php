@@ -17,7 +17,7 @@ class DispatcherTest extends TestCase
 
     public function setUp ( )
     {
-        $this->resolver = Mockery::mock ( 'Agreed\\Application' );
+        $this->resolver = Mockery::mock ( 'Agreed\\Technical\\Application' );
         $this->dispatcher = new Dispatcher ( $this->resolver );
     }
 

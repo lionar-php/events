@@ -13,21 +13,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lionar/agreements.git",
-                "reference": "a97a587c40ba18194ced153a1255d684dc6b43a7"
+                "reference": "ac85af32e44cdaca3aef592add0febcd65a93ebe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lionar/agreements/zipball/a97a587c40ba18194ced153a1255d684dc6b43a7",
-                "reference": "a97a587c40ba18194ced153a1255d684dc6b43a7",
+                "url": "https://api.github.com/repos/lionar/agreements/zipball/ac85af32e44cdaca3aef592add0febcd65a93ebe",
+                "reference": "ac85af32e44cdaca3aef592add0febcd65a93ebe",
                 "shasum": ""
             },
             "require": {
+                "lionar/support": "*",
                 "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "lionar/testing": "*"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Agreed\\": [
+                    "Agreed\\Technical\\": [
                         "source"
                     ]
                 }
@@ -43,13 +47,60 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Lionar's interfaces used throughout all sorts of lionar components",
+            "description": "Lionar's interfaces used throughout all sorts of lionar components.",
             "keywords": [
                 "Agreements",
                 "component",
                 "lionar"
             ],
-            "time": "2016-09-11 14:39:58"
+            "time": "2016-09-30 12:30:44"
+        },
+        {
+            "name": "lionar/support",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lionar/support.git",
+                "reference": "0ca4e66e946a464455d93544e462b5ac761828c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lionar/support/zipball/0ca4e66e946a464455d93544e462b5ac761828c3",
+                "reference": "0ca4e66e946a464455d93544e462b5ac761828c3",
+                "shasum": ""
+            },
+            "require-dev": {
+                "lionar/testing": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Support\\": "source"
+                },
+                "files": [
+                    "helpers/arrays.php",
+                    "helpers/classes.php",
+                    "helpers/serialization.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aron Wouters",
+                    "email": "lionar@mail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Supporting tools and functions.",
+            "keywords": [
+                "component",
+                "lionar",
+                "support"
+            ],
+            "time": "2016-09-27 11:25:11"
         }
     ],
     "packages-dev": [
@@ -235,19 +286,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lionar/testing.git",
-                "reference": "506d04c1b931037759a243c9e09d0f6e068c7cb5"
+                "reference": "06d982d3cc6599aab610924055eac44661e566ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lionar/testing/zipball/506d04c1b931037759a243c9e09d0f6e068c7cb5",
-                "reference": "506d04c1b931037759a243c9e09d0f6e068c7cb5",
+                "url": "https://api.github.com/repos/lionar/testing/zipball/06d982d3cc6599aab610924055eac44661e566ed",
+                "reference": "06d982d3cc6599aab610924055eac44661e566ed",
                 "shasum": ""
             },
             "require": {
                 "hamcrest/hamcrest-php": "*",
                 "mikey179/vfsstream": "dev-master",
-                "mockery/mockery": "dev-master",
-                "phpunit/phpunit": "@stable"
+                "mockery/mockery": "@stable",
+                "phpunit/phpunit": "@stable",
+                "symfony/css-selector": "@stable",
+                "symfony/dom-crawler": "@stable"
             },
             "type": "library",
             "autoload": {
@@ -263,12 +316,12 @@
             "license": [
                 "MIT"
             ],
-            "description": "This package consists of files that are regularly used for unit testing",
+            "description": "This package consists of files that are regularly used for unit testing.",
             "keywords": [
                 "lionar",
                 "unit testing"
             ],
-            "time": "2016-09-10 16:32:30"
+            "time": "2016-09-26 22:24:17"
         },
         {
             "name": "mikey179/vfsStream",
@@ -322,12 +375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d"
+                "reference": "812fcbd1c40cb5cd33e7ab48ffcf2ce8d202c74e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/ee06e7b564ea4dc9b90605d894c2626f87df334d",
-                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/812fcbd1c40cb5cd33e7ab48ffcf2ce8d202c74e",
+                "reference": "812fcbd1c40cb5cd33e7ab48ffcf2ce8d202c74e",
                 "shasum": ""
             },
             "require": {
@@ -379,20 +432,20 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-07-06 09:05:19"
+            "time": "2016-09-15 18:44:18"
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.2",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc"
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/da8529775f14f4fdae33f916eb0cf65f6afbddbc",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
                 "shasum": ""
             },
             "require": {
@@ -421,7 +474,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2016-09-06 16:07:05"
+            "time": "2016-09-16 13:37:59"
         },
         {
             "name": "php-di/invoker",
@@ -619,16 +672,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd"
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
                 "shasum": ""
             },
             "require": {
@@ -660,7 +713,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-06-10 09:48:41"
+            "time": "2016-09-30 07:12:33"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -715,12 +768,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "d883566b83ae601a50b38b249e92450dc57cf875"
+                "reference": "c1016e6501312201ede77e3911748024d78cdd31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/d883566b83ae601a50b38b249e92450dc57cf875",
-                "reference": "d883566b83ae601a50b38b249e92450dc57cf875",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c1016e6501312201ede77e3911748024d78cdd31",
+                "reference": "c1016e6501312201ede77e3911748024d78cdd31",
                 "shasum": ""
             },
             "require": {
@@ -731,7 +784,8 @@
                 "sebastian/recursion-context": "^1.0"
             },
             "require-dev": {
-                "phpspec/phpspec": "^2.0"
+                "phpspec/phpspec": "^2.0",
+                "phpunit/phpunit": "^4.8 || ^5"
             },
             "type": "library",
             "extra": {
@@ -769,7 +823,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2016-07-19 16:08:43"
+            "time": "2016-09-28 11:19:12"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1021,12 +1075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f37c4c2c91142e9dd1eac01de508bbc1f62c1d65"
+                "reference": "376acc02748ad93ab2795630d7298b96313230b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f37c4c2c91142e9dd1eac01de508bbc1f62c1d65",
-                "reference": "f37c4c2c91142e9dd1eac01de508bbc1f62c1d65",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/376acc02748ad93ab2795630d7298b96313230b8",
+                "reference": "376acc02748ad93ab2795630d7298b96313230b8",
                 "shasum": ""
             },
             "require": {
@@ -1095,7 +1149,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-09-08 05:23:43"
+            "time": "2016-09-30 09:40:06"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1670,17 +1724,185 @@
             "time": "2016-02-04 12:56:52"
         },
         {
+            "name": "symfony/css-selector",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "3912a05e7ae31afb78101f9de1be6b143c064fac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/3912a05e7ae31afb78101f9de1be6b143c064fac",
+                "reference": "3912a05e7ae31afb78101f9de1be6b143c064fac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\CssSelector\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-François Simon",
+                    "email": "jeanfrancois.simon@sensiolabs.com"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony CssSelector Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-09-06 11:07:23"
+        },
+        {
+            "name": "symfony/dom-crawler",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "241ffb09788b99db0e6b74740ae394850bc456f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/241ffb09788b99db0e6b74740ae394850bc456f2",
+                "reference": "241ffb09788b99db0e6b74740ae394850bc456f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "symfony/css-selector": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/css-selector": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\DomCrawler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DomCrawler Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-08-31 11:20:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c",
+                "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-08-30 17:06:17"
+        },
+        {
             "name": "symfony/yaml",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "aa8be2235b5dd4e472424552390609f61996f5ab"
+                "reference": "f3abbc0c63c0c7803db79a7398bb983e5b089f53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/aa8be2235b5dd4e472424552390609f61996f5ab",
-                "reference": "aa8be2235b5dd4e472424552390609f61996f5ab",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/f3abbc0c63c0c7803db79a7398bb983e5b089f53",
+                "reference": "f3abbc0c63c0c7803db79a7398bb983e5b089f53",
                 "shasum": ""
             },
             "require": {
@@ -1722,7 +1944,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-02 02:14:06"
+            "time": "2016-09-28 14:20:56"
         },
         {
             "name": "webmozart/assert",

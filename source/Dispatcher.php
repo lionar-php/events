@@ -2,12 +2,12 @@
 
 namespace Events;
 
-use Agreed\Application;
+use Agreed\Technical\Application;
 use Exception;
 use ReflectionFunction;
 
 
-class Dispatcher implements \Agreed\Events\Dispatcher
+class Dispatcher implements \Agreed\Technical\Events\Dispatcher
 {
     private $resolver = null;
     private $events = array ( );
